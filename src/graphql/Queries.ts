@@ -13,7 +13,10 @@ const GetPokemonsQuery = gql`
       limit: $limit
       offset: $offset
       where: {
-        _not: { pokemon_v2_pokemonevolutions: {} }
+        _or: [
+          { _not: { pokemon_v2_pokemonspecy: {} } }
+          { pokemon_v2_pokemonspecy: { is_baby: { _eq: true } } }
+        ]
         name: { _like: $searchTerm }
         pokemon_v2_pokemons: {
           base_experience: { _gte: $base_experience }
@@ -44,7 +47,10 @@ const GetPokemonsQuery = gql`
     }
     pokemon_v2_pokemonspecies_aggregate(
       where: {
-        _not: { pokemon_v2_pokemonevolutions: {} }
+        _or: [
+          { _not: { pokemon_v2_pokemonspecy: {} } }
+          { pokemon_v2_pokemonspecy: { is_baby: { _eq: true } } }
+        ]
         name: { _like: $searchTerm }
         pokemon_v2_pokemons: {
           base_experience: { _gte: $base_experience }
