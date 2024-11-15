@@ -27,6 +27,11 @@ const GetPokemonsQuery = gql`
         name
       }
     }
+    pokemon_v2_pokemonspecies_aggregate(distinct_on: evolution_chain_id) {
+      aggregate {
+        count
+      }
+    }
   }
 `;
 

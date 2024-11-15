@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 type Props = {
   pokemon: PokemonType;
-  pokemonRef: LegacyRef<HTMLDivElement> | undefined;
+  pokemonRef?: LegacyRef<HTMLDivElement> | undefined;
 };
 
 const PokemonCard = ({ pokemon, pokemonRef }: Props) => {

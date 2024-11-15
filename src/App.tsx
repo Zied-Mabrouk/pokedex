@@ -18,7 +18,7 @@ function App() {
   ]);
   return (
     <ApolloProvider client={client}>
-      <div className="bg-background">
+      <div className="bg-background min-h-screen">
         <RouterProvider router={router} />
       </div>
     </ApolloProvider>

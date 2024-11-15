@@ -19,3 +19,9 @@ export const parsePokemonDataSet = (data: any[]): PokemonType[] => {
     ?.filter((pokemon) => !!pokemon.pokemon_v2_pokemons)
     .map((pokemon) => parsePokemonData(pokemon));
 };
+
+export const parseData = (data: any[], isArray = true, index = 0) => {
+  return isArray
+    ? (Object.values(data)[index] as any[])
+    : (Object.values(data)[index] as any);
+};

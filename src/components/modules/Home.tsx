@@ -1,42 +1,69 @@
-import React, { useState } from 'react';
-import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
+import React, { useCallback, useMemo, useState } from 'react';
 import { GetPokemonsQuery } from '../../graphql/Queries';
 import PokemonCard from '../cores/PokemonCard';
 import { PokemonType } from '../../types/pokemon';
-import { parsePokemonDataSet } from '../../utils/data';
+import { parseData, parsePokemonDataSet } from '../../utils/data';
+import { useQuery } from '@apollo/client';
+import { useSearchParams } from 'react-router-dom';
+import Pagination from '../cores/Pagination';
+import Loader from '../cores/Loader';
 
-type Props = {};
+const Home = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
 
-const Home = (props: Props) => {
-  const [pokemonsList, setPokemonsList] = useState<any[]>([]);
-  //   const { name, filter, setFilter } = useSearchQuery<string>({
-  //     router,
-  //     delay: 500,
-  //     initialFilterState: '',
-  //   });
-
-  const { ref, networkStatus, error, fetchMore, parentRef } = useInfiniteScroll(
-    {
-      query: GetPokemonsQuery,
-      queryVariables: {},
-      items: pokemonsList,
-      setItems: setPokemonsList,
-      limit: 10,
-      offset: 0,
-      parser: (newValues) => {
-        return parsePokemonDataSet(newValues);
-      },
-    }
+  const [page, setPage] = useState<number>(
+    parseInt(searchParams.get('page') ?? '1')
   );
+  const [pagesNumber, setPageNumbers] = useState<number>(0);
+  const [pokemonsList, setPokemonsList] = useState<PokemonType[]>([]);
 
+  const { fetchMore, loading, refetch } = useQuery(GetPokemonsQuery, {
+    notifyOnNetworkStatusChange: true,
+    variables: {
+      limit: 10,
+      offset: (page - 1) * 10,
+    },
+    onCompleted: (data) => {
+      const parsedSpecies = parseData(data);
+      const parsedCount = parseData(data, false, 1);
+
+      setPageNumbers(Math.ceil(parsedCount.aggregate.count / 10));
+      setPokemonsList(parsePokemonDataSet(parsedSpecies));
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
+
+  const onChangePage = useCallback((p: number) => {
+    setSearchParams({ page: p.toString() });
+
+    setPage(p);
+  }, []);
   return (
-    <div
-      className="grid grid-cols-2 justify-center max-w-4xl mx-auto gap-8"
-      ref={parentRef}
-    >
-      {pokemonsList.map((pokemon: PokemonType) => (
-        <PokemonCard pokemonRef={ref} key={pokemon.id} pokemon={pokemon} />
-      ))}
+    <div className=" max-w-4xl mx-auto flex flex-col">
+      <div className="w-full py-4">
+        <input
+          placeholder="Search for a pokemon..."
+          className="rounded-lg px-4 py-2 w-full text-black-500"
+        />
+      </div>
+      <div className="w-full flex justify-center">
+        <Pagination
+          currentPage={page}
+          pages={pagesNumber}
+          onChangePage={onChangePage}
+        />
+      </div>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="grid grid-cols-2 justify-center gap-8 py-4">
+          {pokemonsList.map((pokemon: PokemonType) => (
+            <PokemonCard key={pokemon.id} pokemon={pokemon} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
