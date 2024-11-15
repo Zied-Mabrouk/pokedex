@@ -41,3 +41,7 @@
 .pokemon-card {
   background: linear-gradient(to right, #ffffff, #b8bab8);
 }
+
+.text-shadow {
+  text-shadow: 0 0 5px rgba(0, 0, 0, 1);
+}

@@ -29,7 +29,7 @@ const PokemonCard = ({ pokemon, pokemonRef }: Props) => {
         <div className="absolute bottom-0 left-0 flex p-4 justify-between w-full">
           <Link
             to={`/${pokemon.id}`}
-            className="uppercase text-xl font-aero font-bold"
+            className="uppercase text-xl font-aero font-bold text-shadow "
           >
             {pokemon.name}
           </Link>
