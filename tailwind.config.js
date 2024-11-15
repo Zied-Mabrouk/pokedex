@@ -13,6 +13,9 @@ module.exports = {
         white: {
           500: '#ffffff',
         },
+        black: {
+          500: '#000000',
+        },
         background: 'var(--background)',
         normal: 'var(--normal)',
         fire: 'var(--fire)',

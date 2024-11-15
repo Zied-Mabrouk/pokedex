@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Aero';
+  src: url('../public/fonts/Aero.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  color: white;
+  --background: #171616;
+  --normal: #a8a878;
+  --fire: #ffa07a;
+  --water: #6495ed;
+  --grass: #34c759;
+  --ice: #66d9ef;
+  --electric: #f7dc6f;
+  --psychic: #f85a9f;
+  --fighting: #c03028;
+  --poison: #a040a0;
+  --ground: #e0c068;
+  --flying: #a890ff;
+  --bug: #b8a038;
+  --rock: #b8a038;
+  --ghost: #705898;
+  --steel: #b8b8b8;
+  --dragon: #6f35fc;
+  --dark: #705848;
+  --fairy: #c7c5b8;
+  --default: #000000;
+}
+
+.pokemon-card {
+  background: linear-gradient(to right, #ffffff, #b8bab8);
+}

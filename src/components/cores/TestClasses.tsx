@@ -32,6 +32,7 @@ const TestClasses = () => {
       <span className="bg-purple-500"></span>
       <span className="bg-pink-500"></span>
       <span className="bg-gray-500"></span>
+      <span className="bg-black-500"></span>
     </div>
   );
 };
