@@ -1,4 +1,10 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { GetPokemonsQuery } from '../../graphql/Queries';
 import PokemonCard from '../cores/PokemonCard';
 import { PokemonType } from '../../types/pokemon';
@@ -15,13 +21,15 @@ const Home = () => {
     parseInt(searchParams.get('page') ?? '1')
   );
   const [pagesNumber, setPageNumbers] = useState<number>(0);
+  const [search, setSearch] = useState<string>('');
   const [pokemonsList, setPokemonsList] = useState<PokemonType[]>([]);
 
-  const { loading } = useQuery(GetPokemonsQuery, {
+  const { loading, refetch } = useQuery(GetPokemonsQuery, {
     notifyOnNetworkStatusChange: true,
     variables: {
       limit: 10,
       offset: (page - 1) * 10,
+      searchTerm: '%',
     },
     onCompleted: (data) => {
       const parsedSpecies = parseData(data);
@@ -43,6 +51,24 @@ const Home = () => {
     [setSearchParams]
   );
 
+  useEffect(() => {
+    setSearchParams({});
+    setPage(1);
+  }, [search]);
+
+  useEffect(() => {
+    refetch({
+      limit: 10,
+      offset: (page - 1) * 10,
+      searchTerm: `${search}%`,
+    }).then((data) => {
+      const parsedSpecies = parseData(data.data);
+      const parsedCount = parseData(data.data, false, 1);
+      setPageNumbers(Math.ceil(parsedCount.aggregate.count / 10));
+      setPokemonsList(parsePokemonDataSet(parsedSpecies));
+    });
+  }, [search, refetch, page]);
+
   const paginationElement = useMemo(
     () => (
       <div className="w-full flex justify-center">
@@ -56,12 +82,18 @@ const Home = () => {
     [page, pagesNumber, onChangePage]
   );
 
+  const onHandleSearch = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  }, []);
+
   return (
     <div className="max-w-4xl mx-auto flex flex-col min-h-screen w-full px-8">
       <div className="w-full py-4">
         <input
           placeholder="Search for a pokemon..."
           className="rounded-lg px-4 py-2 w-full text-black-500"
+          value={search}
+          onChange={onHandleSearch}
         />
       </div>
       <div className="flex flex-col h-full justify-between py-4 flex-1">

@@ -1,11 +1,12 @@
 import { gql } from '@apollo/client';
 
 const GetPokemonsQuery = gql`
-  query getItems($limit: Int, $offset: Int) {
+  query getItems($limit: Int, $offset: Int, $searchTerm: String!) {
     pokemon_v2_pokemonspecies(
       limit: $limit
       offset: $offset
       distinct_on: evolution_chain_id
+      where: { name: { _like: $searchTerm } }
     ) {
       id
       evolution_chain_id
@@ -27,7 +28,10 @@ const GetPokemonsQuery = gql`
         name
       }
     }
-    pokemon_v2_pokemonspecies_aggregate(distinct_on: evolution_chain_id) {
+    pokemon_v2_pokemonspecies_aggregate(
+      distinct_on: evolution_chain_id
+      where: { name: { _like: $searchTerm } }
+    ) {
       aggregate {
         count
       }
