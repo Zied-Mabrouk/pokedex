@@ -45,3 +45,7 @@
 .text-shadow {
   text-shadow: 0 0 5px rgba(0, 0, 0, 1);
 }
+
+.remove-scrollbars {
+  scrollbar-width: none;
+}

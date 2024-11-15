@@ -1,4 +1,4 @@
-import { PokemonType } from '../types/pokemon';
+import { PokemonType, PokemonTypeEnum } from '../types/pokemon';
 import { SiNormalizedotcss } from 'react-icons/si';
 import { LuSwords } from 'react-icons/lu';
 import {
@@ -29,92 +29,92 @@ export type PokemonTypeColor = {
 
 export const getPokemonTypeColor = (typeColor: string): PokemonTypeColor => {
   switch (typeColor) {
-    case 'normal':
+    case PokemonTypeEnum.NORMAL:
       return {
         icon: SiNormalizedotcss,
         type: typeColor,
       };
-    case 'fire':
+    case PokemonTypeEnum.FIRE:
       return {
         icon: FaFire,
         type: typeColor,
       };
-    case 'water':
+    case PokemonTypeEnum.WATER:
       return {
         icon: FaWater,
         type: typeColor,
       };
-    case 'grass':
+    case PokemonTypeEnum.GRASS:
       return {
         icon: MdGrass,
         type: typeColor,
       };
-    case 'ice':
+    case PokemonTypeEnum.ICE:
       return {
         icon: FaDiceD6,
         type: typeColor,
       };
-    case 'electric':
+    case PokemonTypeEnum.ELECTRIC:
       return {
         icon: MdElectricBolt,
         type: typeColor,
       };
-    case 'psychic':
+    case PokemonTypeEnum.PSYCHIC:
       return {
         icon: GiPsychicWaves,
         type: typeColor,
       };
-    case 'fighting':
+    case PokemonTypeEnum.FIGHTING:
       return {
         icon: LuSwords,
         type: typeColor,
       };
-    case 'poison':
+    case PokemonTypeEnum.POISON:
       return {
         icon: GiPoisonBottle,
         type: typeColor,
       };
-    case 'ground':
+    case PokemonTypeEnum.GROUND:
       return {
         icon: GiEarthAmerica,
         type: typeColor,
       };
-    case 'flying':
+    case PokemonTypeEnum.FLYING:
       return {
         icon: GiBatWing,
         type: typeColor,
       };
-    case 'bug':
+    case PokemonTypeEnum.BUG:
       return {
         icon: FaBug,
         type: typeColor,
       };
-    case 'rock':
+    case PokemonTypeEnum.ROCK:
       return {
         icon: GiStoneBlock,
         type: typeColor,
       };
-    case 'ghost':
+    case PokemonTypeEnum.GHOST:
       return {
         icon: FaGhost,
         type: typeColor,
       };
-    case 'steel':
+    case PokemonTypeEnum.STEEL:
       return {
         icon: GiSteelClaws,
         type: typeColor,
       };
-    case 'dragon':
+    case PokemonTypeEnum.DRAGON:
       return {
         icon: GiDoubleDragon,
         type: typeColor,
       };
-    case 'dark':
+    case PokemonTypeEnum.DARK:
       return {
         icon: MdDarkMode,
         type: typeColor,
       };
-    case 'fairy':
+    case PokemonTypeEnum.FAIRY:
       return {
         icon: GiFairyWand,
         type: typeColor,

@@ -1,3 +1,4 @@
+import { SelectValue } from '../types/misc';
 import { PokemonType } from '../types/pokemon';
 
 const parsePokemonData = (pokemon: any) => {
@@ -24,4 +25,15 @@ export const parseData = (data: any[], isArray = true, index = 0) => {
   return isArray
     ? (Object.values(data)[index] as any[])
     : (Object.values(data)[index] as any);
+};
+
+export const transformSelectValue = (option: string): SelectValue => {
+  return {
+    value: option,
+    label: option,
+  };
+};
+
+export const transformSelectValues = (options: string[]): SelectValue[] => {
+  return options.map(transformSelectValue);
 };

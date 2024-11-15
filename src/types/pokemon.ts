@@ -9,6 +9,27 @@ type PokemonSpriteType = {
   front_shiny_female: string;
 };
 
+export enum PokemonTypeEnum {
+  NORMAL = 'normal',
+  FIRE = 'fire',
+  WATER = 'water',
+  GRASS = 'grass',
+  ICE = 'ice',
+  ELECTRIC = 'electric',
+  PSYCHIC = 'psychic',
+  FIGHTING = 'fighting',
+  POISON = 'poison',
+  GROUND = 'ground',
+  FLYING = 'flying',
+  BUG = 'bug',
+  ROCK = 'rock',
+  GHOST = 'ghost',
+  STEEL = 'steel',
+  DRAGON = 'dragon',
+  DARK = 'dark',
+  FAIRY = 'fairy',
+}
+
 export type PokemonType = {
   id: number;
   name: string;

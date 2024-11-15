@@ -1,10 +1,4 @@
-import React, {
-  ChangeEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { GetPokemonsQuery } from '../../graphql/Queries';
 import PokemonCard from '../cores/PokemonCard';
 import { PokemonType } from '../../types/pokemon';
@@ -13,8 +7,8 @@ import { useQuery } from '@apollo/client';
 import { useSearchParams } from 'react-router-dom';
 import Pagination from '../cores/Pagination';
 import Loader from '../cores/Loader';
-import Button from '../cores/Button';
 import Search from '../cores/Search';
+import { SearchType } from '../../types/misc';
 
 const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,7 +17,12 @@ const Home = () => {
     parseInt(searchParams.get('page') ?? '1')
   );
   const [pagesNumber, setPageNumbers] = useState<number>(0);
-  const [search, setSearch] = useState<string>('');
+  const [search, setSearch] = useState<SearchType>({
+    mainSearch: '',
+    advancedSearch: {
+      attribute: '',
+    },
+  });
   const [pokemonsList, setPokemonsList] = useState<PokemonType[]>([]);
 
   const { loading, refetch } = useQuery(GetPokemonsQuery, {
@@ -32,6 +31,9 @@ const Home = () => {
       limit: 10,
       offset: (page - 1) * 10,
       searchTerm: '%',
+      height: 0,
+      weight: 0,
+      base_experience: 0,
     },
     onCompleted: (data) => {
       const parsedSpecies = parseData(data);
@@ -54,15 +56,22 @@ const Home = () => {
   );
 
   useEffect(() => {
+    if (!searchParams.get('page') || !search.mainSearch) return;
     setSearchParams({});
     setPage(1);
-  }, [search]);
+  }, [search, setSearchParams, searchParams]);
 
   useEffect(() => {
+    const advancedSearch =
+      search.advancedSearch.attribute && search.advancedSearch.value
+        ? { [search.advancedSearch.attribute]: search.advancedSearch.value }
+        : {};
+    console.log(advancedSearch);
     refetch({
       limit: 10,
       offset: (page - 1) * 10,
-      searchTerm: `${search.toLowerCase()}%`,
+      searchTerm: `${search.mainSearch.toLowerCase()}%`,
+      ...advancedSearch,
     }).then((data) => {
       const parsedSpecies = parseData(data.data);
       const parsedCount = parseData(data.data, false, 1);

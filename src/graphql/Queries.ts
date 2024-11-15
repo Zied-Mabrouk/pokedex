@@ -1,12 +1,26 @@
 import { gql } from '@apollo/client';
 
 const GetPokemonsQuery = gql`
-  query getItems($limit: Int, $offset: Int, $searchTerm: String!) {
+  query getItems(
+    $limit: Int
+    $offset: Int
+    $searchTerm: String!
+    $height: Int = 0
+    $weight: Int = 0
+    $base_experience: Int = 0
+  ) {
     pokemon_v2_pokemonspecies(
       limit: $limit
       offset: $offset
-      distinct_on: evolution_chain_id
-      where: { name: { _like: $searchTerm } }
+      where: {
+        _not: { pokemon_v2_pokemonevolutions: {} }
+        name: { _like: $searchTerm }
+        pokemon_v2_pokemons: {
+          base_experience: { _gte: $base_experience }
+          height: { _gte: $height }
+          weight: { _gte: $weight }
+        }
+      }
     ) {
       id
       evolution_chain_id
@@ -29,8 +43,15 @@ const GetPokemonsQuery = gql`
       }
     }
     pokemon_v2_pokemonspecies_aggregate(
-      distinct_on: evolution_chain_id
-      where: { name: { _like: $searchTerm } }
+      where: {
+        _not: { pokemon_v2_pokemonevolutions: {} }
+        name: { _like: $searchTerm }
+        pokemon_v2_pokemons: {
+          base_experience: { _gte: $base_experience }
+          height: { _gte: $height }
+          weight: { _gte: $weight }
+        }
+      }
     ) {
       aggregate {
         count
