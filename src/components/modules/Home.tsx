@@ -17,7 +17,7 @@ const Home = () => {
   const [pagesNumber, setPageNumbers] = useState<number>(0);
   const [pokemonsList, setPokemonsList] = useState<PokemonType[]>([]);
 
-  const { fetchMore, loading, refetch } = useQuery(GetPokemonsQuery, {
+  const { loading } = useQuery(GetPokemonsQuery, {
     notifyOnNetworkStatusChange: true,
     variables: {
       limit: 10,
@@ -35,19 +35,16 @@ const Home = () => {
     },
   });
 
-  const onChangePage = useCallback((p: number) => {
-    setSearchParams({ page: p.toString() });
+  const onChangePage = useCallback(
+    (p: number) => {
+      setSearchParams({ page: p.toString() });
+      setPage(p);
+    },
+    [setSearchParams]
+  );
 
-    setPage(p);
-  }, []);
-  return (
-    <div className=" max-w-4xl mx-auto flex flex-col">
-      <div className="w-full py-4">
-        <input
-          placeholder="Search for a pokemon..."
-          className="rounded-lg px-4 py-2 w-full text-black-500"
-        />
-      </div>
+  const paginationElement = useMemo(
+    () => (
       <div className="w-full flex justify-center">
         <Pagination
           currentPage={page}
@@ -55,15 +52,31 @@ const Home = () => {
           onChangePage={onChangePage}
         />
       </div>
-      {loading ? (
-        <Loader />
-      ) : (
-        <div className="grid grid-cols-2 justify-center gap-8 py-4">
-          {pokemonsList.map((pokemon: PokemonType) => (
-            <PokemonCard key={pokemon.id} pokemon={pokemon} />
-          ))}
-        </div>
-      )}
+    ),
+    [page, pagesNumber, onChangePage]
+  );
+
+  return (
+    <div className="max-w-4xl mx-auto flex flex-col min-h-screen w-full px-8">
+      <div className="w-full py-4">
+        <input
+          placeholder="Search for a pokemon..."
+          className="rounded-lg px-4 py-2 w-full text-black-500"
+        />
+      </div>
+      <div className="flex flex-col h-full justify-between py-4 flex-1">
+        {paginationElement}
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 justify-center gap-8 py-4">
+            {pokemonsList.map((pokemon: PokemonType) => (
+              <PokemonCard key={pokemon.id} pokemon={pokemon} />
+            ))}
+          </div>
+        )}
+        {paginationElement}
+      </div>
     </div>
   );
 };

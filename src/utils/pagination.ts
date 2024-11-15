@@ -33,8 +33,5 @@ export const generatePagination = (
     pagination.push(totalPages);
   }
 
-  console.log(totalPages - currentPage);
-  console.log(pagination);
-
   return pagination;
 };

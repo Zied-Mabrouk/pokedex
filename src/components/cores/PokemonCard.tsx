@@ -1,11 +1,4 @@
-import React, {
-  DetailedHTMLProps,
-  HTMLAttributes,
-  LegacyRef,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, { LegacyRef, useMemo } from 'react';
 import { PokemonType } from '../../types/pokemon';
 import { getPokemonTypeColors } from '../../utils/pokemon';
 import { Link } from 'react-router-dom';
@@ -16,15 +9,6 @@ type Props = {
 };
 
 const PokemonCard = ({ pokemon, pokemonRef }: Props) => {
-  const [rot, setRot] = useState(false);
-
-  //   useEffect(() => {
-  //     const interval = setInterval(() => {
-  //       setRot((prev) => !prev);
-  //     }, 500);
-  //     return () => clearInterval(interval);
-  //   }, []);
-
   const typeColors = useMemo(
     () => getPokemonTypeColors(pokemon.types),
     [pokemon.types]
@@ -37,9 +21,7 @@ const PokemonCard = ({ pokemon, pokemonRef }: Props) => {
       <div className={`bg-${pokemon.color}-500 bg-opacity-80 h-full w-full`}>
         {pokemon.sprites && (
           <img
-            src={
-              rot ? pokemon.sprites.front_shiny : pokemon.sprites.front_default
-            }
+            src={pokemon.sprites.front_default}
             alt="pokemon.name"
             className="w-full object-contain h-full"
           />

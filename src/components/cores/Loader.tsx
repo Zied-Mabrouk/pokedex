@@ -9,7 +9,7 @@ const Loader = () => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="flex w-full justify-center flex-col items-center">
+    <div className="flex w-full justify-center flex-col items-center py-8">
       <img className="w-44" src="./loader.gif" alt="Loading..." />
       <span className="text-4xl w-44 font-aero uppercase">
         Loading
