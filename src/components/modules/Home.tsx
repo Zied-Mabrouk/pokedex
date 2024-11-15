@@ -13,6 +13,8 @@ import { useQuery } from '@apollo/client';
 import { useSearchParams } from 'react-router-dom';
 import Pagination from '../cores/Pagination';
 import Loader from '../cores/Loader';
+import Button from '../cores/Button';
+import Search from '../cores/Search';
 
 const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -60,7 +62,7 @@ const Home = () => {
     refetch({
       limit: 10,
       offset: (page - 1) * 10,
-      searchTerm: `${search}%`,
+      searchTerm: `${search.toLowerCase()}%`,
     }).then((data) => {
       const parsedSpecies = parseData(data.data);
       const parsedCount = parseData(data.data, false, 1);
@@ -82,20 +84,9 @@ const Home = () => {
     [page, pagesNumber, onChangePage]
   );
 
-  const onHandleSearch = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  }, []);
-
   return (
     <div className="max-w-4xl mx-auto flex flex-col min-h-screen w-full px-8">
-      <div className="w-full py-4">
-        <input
-          placeholder="Search for a pokemon..."
-          className="rounded-lg px-4 py-2 w-full text-black-500"
-          value={search}
-          onChange={onHandleSearch}
-        />
-      </div>
+      <Search search={search} setSearch={setSearch} />
       <div className="flex flex-col h-full justify-between py-4 flex-1">
         {paginationElement}
         {loading ? (
