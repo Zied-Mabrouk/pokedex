@@ -2,7 +2,6 @@ import { SelectValue } from '../types/misc';
 import { PokemonType } from '../types/pokemon';
 
 const parsePokemonData = (pokemon: any): PokemonType => {
-  console.log(pokemon);
   return {
     id: pokemon.id,
     name: pokemon.name,
