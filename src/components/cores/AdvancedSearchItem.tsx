@@ -38,15 +38,15 @@ const AdvancedSearchItem = ({
     [setSearch, indexKey]
   );
   return (
-    <div className="py-4 w-full flex gap-8">
+    <div className="py-4 w-full flex gap-2 sm:gap-8">
       <Select
-        label={'select a stat attribute'}
+        label={'Filter By Pokemon Stat'}
         onChange={(value) => onAttributeChange(value.value)}
         options={options}
         selected={advancedSearch.attribute}
       />
       {advancedSearch.attribute && (
-        <div className="flex items-end w-1/2">
+        <div className="flex items-end w-full">
           <Input
             value={advancedSearch.value ?? ''}
             type="number"

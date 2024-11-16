@@ -21,7 +21,9 @@ const Select = ({ label, options, selected, onChange }: Props) => {
 
   return (
     <div className="flex flex-col gap-2 w-full">
-      <label className="capitalize">{label}</label>
+      <label className="capitalize whitespace-nowrap text-sm md:text:base">
+        {label}
+      </label>
       <SelectComponent
         className="text-black-500"
         placeholder="-- Select an option --"

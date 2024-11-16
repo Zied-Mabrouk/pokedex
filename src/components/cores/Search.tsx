@@ -145,7 +145,7 @@ const Search = ({ search, setSearch, setOrderBy }: Props) => {
         />
         <Select
           onChange={onHandleTypeSearch}
-          label="Type"
+          label="Filter By Pokemon Type"
           options={typeOptions}
           selected={search.typeSearch}
         />
