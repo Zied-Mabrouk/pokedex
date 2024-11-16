@@ -3,6 +3,9 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      screens: {
+        xs: '350px', // Custom xs breakpoint at 480px
+      },
       fontFamily: {
         aero: ['AeroFont', 'sans-serif'], // Define a custom font name
       },
