@@ -2,7 +2,11 @@ import { SelectValue } from '../types/misc';
 import { PokemonType } from '../types/pokemon';
 
 const parsePokemonData = (pokemon: any) => {
-  const pokemonStat = pokemon.pokemon_v2_pokemons[0];
+  const pokemonStat = pokemon.pokemon_v2_pokemons.toSorted(
+    (a: any, b: any) =>
+      b.pokemon_v2_pokemontypes.length - a.pokemon_v2_pokemontypes.length
+  )[0];
+
   return {
     id: pokemon.id,
     name: pokemon.name,
@@ -12,6 +16,12 @@ const parsePokemonData = (pokemon: any) => {
       (type: any) => type.pokemon_v2_type.name
     ),
     sprites: pokemonStat.pokemon_v2_pokemonsprites[0].sprites,
+    stats: pokemonStat.pokemon_v2_pokemonstats.reduce(
+      (acc: Record<string, number>, curr: any) => {
+        return { ...acc, [curr.pokemon_v2_stat.name]: curr.base_stat };
+      },
+      {} as Record<string, number>
+    ),
     color: pokemon.pokemon_v2_pokemoncolor.name,
   };
 };

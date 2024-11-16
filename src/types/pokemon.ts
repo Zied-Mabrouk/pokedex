@@ -30,6 +30,17 @@ export enum PokemonTypeEnum {
   FAIRY = 'fairy',
 }
 
+export enum PokemonStatsEnum {
+  HP = 'hp',
+  ATTACK = 'attack',
+  DEFENSE = 'defense',
+  SPECIAL_ATTACK = 'special-attack',
+  SPECIAL_DEFENSE = 'special-defense',
+  SPEED = 'speed',
+}
+
+type PokemonStatsType = Record<PokemonStatsEnum, number>;
+
 export type PokemonType = {
   id: number;
   name: string;
@@ -38,4 +49,5 @@ export type PokemonType = {
   types: string[];
   color: string;
   sprites: PokemonSpriteType;
+  stats: PokemonStatsType;
 };

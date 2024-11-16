@@ -8,12 +8,14 @@ import React, {
 import Button from './Button';
 import Input from './Input';
 import { transformSelectValues } from '../../utils/data';
-import { SearchType } from '../../types/misc';
+import { SearchType, SelectValue } from '../../types/misc';
 import AdvancedSearchItem from './AdvancedSearchItem';
+import { PokemonStatsEnum, PokemonTypeEnum } from '../../types/pokemon';
+import Select from './Select';
 
 type Props = {
   search: SearchType;
-  setSearch: Dispatch<SetStateAction<SearchType>>;
+  setSearch: (callback: (val: SearchType) => SearchType) => void;
 };
 
 const Search = ({ search, setSearch }: Props) => {
@@ -23,15 +25,50 @@ const Search = ({ search, setSearch }: Props) => {
     setShowAdvancedSearch((prev) => !prev);
   }, []);
 
-  const options = useMemo(
-    () => transformSelectValues(['height', 'weight', 'base_experience']),
+  const [statsOptions, typeOptions] = useMemo(
+    () => [
+      transformSelectValues([
+        PokemonStatsEnum.HP,
+        PokemonStatsEnum.ATTACK,
+        PokemonStatsEnum.DEFENSE,
+        PokemonStatsEnum.SPECIAL_ATTACK,
+        PokemonStatsEnum.SPECIAL_DEFENSE,
+        PokemonStatsEnum.SPEED,
+      ]),
+      transformSelectValues([
+        PokemonTypeEnum.BUG,
+        PokemonTypeEnum.DARK,
+        PokemonTypeEnum.DRAGON,
+        PokemonTypeEnum.ELECTRIC,
+        PokemonTypeEnum.FAIRY,
+        PokemonTypeEnum.FIGHTING,
+        PokemonTypeEnum.FIRE,
+        PokemonTypeEnum.FLYING,
+        PokemonTypeEnum.GHOST,
+        PokemonTypeEnum.GRASS,
+        PokemonTypeEnum.GROUND,
+        PokemonTypeEnum.ICE,
+        PokemonTypeEnum.NORMAL,
+        PokemonTypeEnum.POISON,
+        PokemonTypeEnum.PSYCHIC,
+        PokemonTypeEnum.ROCK,
+        PokemonTypeEnum.STEEL,
+        PokemonTypeEnum.WATER,
+      ]),
+    ],
     []
   );
 
-  const [onHandleSearch] = useMemo(
+  const [onHandleSearch, onHandleTypeSearch] = useMemo(
     () => [
       (value: string) => {
         setSearch((prevSearch) => ({ ...prevSearch, mainSearch: value }));
+      },
+      (value: SelectValue) => {
+        setSearch((prevSearch) => ({
+          ...prevSearch,
+          typeSearch: value.value as PokemonTypeEnum,
+        }));
       },
     ],
     [setSearch]
@@ -53,9 +90,16 @@ const Search = ({ search, setSearch }: Props) => {
         }`}
       >
         <AdvancedSearchItem
-          advancedSearch={search.advancedSearch}
-          options={options}
+          indexKey="statsSearch"
+          advancedSearch={search.statsSearch}
+          options={statsOptions}
           setSearch={setSearch}
+        />
+        <Select
+          onChange={onHandleTypeSearch}
+          label="Type"
+          options={typeOptions}
+          selected={search.typeSearch}
         />
       </div>
     </div>

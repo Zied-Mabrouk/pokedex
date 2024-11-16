@@ -1,3 +1,5 @@
+import { PokemonTypeEnum } from './pokemon';
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnyType = any;
 
@@ -13,5 +15,6 @@ export type AdvancedSearchItemType = {
 
 export type SearchType = {
   mainSearch: string;
-  advancedSearch: AdvancedSearchItemType;
+  statsSearch: AdvancedSearchItemType;
+  typeSearch: PokemonTypeEnum | '';
 };

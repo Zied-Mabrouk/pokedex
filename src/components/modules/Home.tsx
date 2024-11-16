@@ -19,21 +19,21 @@ const Home = () => {
   const [pagesNumber, setPageNumbers] = useState<number>(0);
   const [search, setSearch] = useState<SearchType>({
     mainSearch: '',
-    advancedSearch: {
+    statsSearch: {
       attribute: '',
     },
+    typeSearch: '',
   });
   const [pokemonsList, setPokemonsList] = useState<PokemonType[]>([]);
 
   const { loading, refetch } = useQuery(GetPokemonsQuery, {
     notifyOnNetworkStatusChange: true,
+    skip: !!search.mainSearch || !!search.statsSearch.value,
     variables: {
       limit: 10,
       offset: (page - 1) * 10,
       searchTerm: '%',
-      height: 0,
-      weight: 0,
-      base_experience: 0,
+      filters: {},
     },
     onCompleted: (data) => {
       const parsedSpecies = parseData(data);
@@ -56,22 +56,33 @@ const Home = () => {
   );
 
   useEffect(() => {
-    if (!searchParams.get('page') || !search.mainSearch) return;
-    setSearchParams({});
-    setPage(1);
-  }, [search, setSearchParams, searchParams]);
-
-  useEffect(() => {
-    const advancedSearch =
-      search.advancedSearch.attribute && search.advancedSearch.value
-        ? { [search.advancedSearch.attribute]: search.advancedSearch.value }
+    const statsSearch =
+      search.statsSearch.attribute && search.statsSearch.value
+        ? {
+            pokemon_v2_pokemonstats: {
+              _and: {
+                base_stat: { _eq: parseInt(search.statsSearch.value) },
+                pokemon_v2_stat: {
+                  name: { _eq: search.statsSearch.attribute },
+                },
+              },
+            },
+          }
         : {};
-    console.log(advancedSearch);
+
+    const typeSearch = search.typeSearch
+      ? {
+          pokemon_v2_pokemontypes: {
+            pokemon_v2_type: { name: { _eq: search.typeSearch } },
+          },
+        }
+      : {};
+
     refetch({
       limit: 10,
       offset: (page - 1) * 10,
       searchTerm: `${search.mainSearch.toLowerCase()}%`,
-      ...advancedSearch,
+      filters: { ...statsSearch, ...typeSearch },
     }).then((data) => {
       const parsedSpecies = parseData(data.data);
       const parsedCount = parseData(data.data, false, 1);
@@ -93,9 +104,20 @@ const Home = () => {
     [page, pagesNumber, onChangePage]
   );
 
+  const handleSearchChange = useCallback(
+    (callback: (val: SearchType) => SearchType) => {
+      setSearch((prev) => {
+        setSearchParams({});
+        setPage(1);
+        return callback(prev);
+      });
+    },
+    [setSearchParams]
+  );
+
   return (
     <div className="max-w-4xl mx-auto flex flex-col min-h-screen w-full px-8">
-      <Search search={search} setSearch={setSearch} />
+      <Search search={search} setSearch={handleSearchChange} />
       <div className="flex flex-col h-full justify-between py-4 flex-1">
         {paginationElement}
         {loading ? (

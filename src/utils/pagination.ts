@@ -24,8 +24,8 @@ export const generatePagination = (
   for (let i = start; i <= end; i++) {
     pagination.push(i);
   }
-  if (currentPage - maxVisiblePages >= -1) {
-    if (currentPage - maxVisiblePages > -1) pagination.unshift('...');
+  if (maxVisiblePages - currentPage <= half - 1) {
+    if (maxVisiblePages - currentPage < half - 1) pagination.unshift('...');
     pagination.unshift(1);
   }
   if (totalPages - currentPage >= half + 1) {

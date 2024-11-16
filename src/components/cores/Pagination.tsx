@@ -9,7 +9,7 @@ type Props = {
 
 const Pagination = ({ currentPage, pages, onChangePage }: Props) => {
   const pagesArray = useMemo(
-    () => generatePagination(currentPage, pages),
+    () => generatePagination(currentPage, pages, pages > 5 ? 5 : 3),
     [currentPage, pages]
   );
   return (

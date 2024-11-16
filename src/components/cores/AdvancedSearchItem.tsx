@@ -10,26 +10,32 @@ import Input from './Input';
 type Props = {
   options: SelectValue[];
   advancedSearch: AdvancedSearchItemType;
-  setSearch: Dispatch<SetStateAction<SearchType>>;
+  setSearch: (callback: (val: SearchType) => SearchType) => void;
+  indexKey: keyof SearchType;
 };
 
-const AdvancedSearchItem = ({ options, advancedSearch, setSearch }: Props) => {
+const AdvancedSearchItem = ({
+  options,
+  advancedSearch,
+  setSearch,
+  indexKey,
+}: Props) => {
   const [onAttributeChange, onValueChange] = useMemo(
     () => [
       (attribute: string) => {
         setSearch((prevSearch) => ({
           ...prevSearch,
-          advancedSearch: { ...prevSearch.advancedSearch, attribute },
+          [indexKey]: { ...(prevSearch[indexKey] as any), attribute },
         }));
       },
       (value: string) => {
         setSearch((prevSearch) => ({
           ...prevSearch,
-          advancedSearch: { ...prevSearch.advancedSearch, value },
+          [indexKey]: { ...(prevSearch[indexKey] as any), value },
         }));
       },
     ],
-    [setSearch]
+    [setSearch, indexKey]
   );
   return (
     <div className="py-4 w-full flex gap-8">
