@@ -66,7 +66,7 @@ const PokemonCard = ({ pokemon, pokemonRef }: Props) => {
             )}
             <div className="p-2 w-full flex z-10 h-fit">
               <div className="flex py-4 justify-between w-full items-end rounded-lg bg-opacity-20 bg-gray-200 px-2">
-                <div className="uppercase font-bold text-shadow flex flex-col gap-2 text-xs sm:text-sm md:text-base lg:text-sm">
+                <div className="uppercase font-bold text-shadow items-start flex flex-col gap-2 text-xs sm:text-sm md:text-base lg:text-sm">
                   <span className="whitespace-nowrap">
                     attack: {pokemon.stats.attack}
                   </span>
