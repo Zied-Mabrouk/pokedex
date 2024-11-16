@@ -9,6 +9,7 @@ import Pagination from '../cores/Pagination';
 import Loader from '../cores/Loader';
 import Search from '../cores/Search';
 import { OrderType, SearchType } from '../../types/misc';
+import Layout from './Layout';
 
 const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -118,10 +119,7 @@ const Home = () => {
   );
 
   return (
-    <div className="md:max-w-4xl lg:max-w-[75rem] mx-auto flex flex-col min-h-screen w-full px-4 sm:px-8 overflow-hidden">
-      <h1 className="text-4xl sm:text-6xl lg:text-8xl text-center mt-8 mb-8 font-bold uppercase tracking-wider">
-        PokéDex
-      </h1>
+    <Layout>
       <Search
         search={search}
         setSearch={handleSearchChange}
@@ -140,7 +138,7 @@ const Home = () => {
         )}
         {paginationElement}
       </div>
-    </div>
+    </Layout>
   );
 };
 
