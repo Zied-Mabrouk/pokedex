@@ -119,6 +119,9 @@ const Home = () => {
 
   return (
     <div className="md:max-w-4xl lg:max-w-[75rem] mx-auto flex flex-col min-h-screen w-full px-4 sm:px-8">
+      <h1 className="text-8xl text-center mt-8 mb-8 font-bold uppercase tracking-wider">
+        PokéDex
+      </h1>
       <Search
         search={search}
         setSearch={handleSearchChange}
