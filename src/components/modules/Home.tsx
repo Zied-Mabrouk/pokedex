@@ -118,7 +118,7 @@ const Home = () => {
   );
 
   return (
-    <div className="md:max-w-4xl lg:max-w-[75rem] mx-auto flex flex-col min-h-screen w-full px-2 sm:px-8">
+    <div className="md:max-w-4xl lg:max-w-[75rem] mx-auto flex flex-col min-h-screen w-full px-4 sm:px-8">
       <Search
         search={search}
         setSearch={handleSearchChange}

@@ -63,20 +63,17 @@ const PokemonCard = ({ pokemon, pokemonRef }: Props) => {
           )}
           <div className="p-2 w-full flex z-10 h-fit">
             <div className="flex py-4 justify-between w-full items-end rounded-lg bg-opacity-20 bg-gray-200 px-2">
-              <div className="uppercase font-bold text-shadow flex flex-col gap-2 text-sm md:text-base lg:text-sm">
+              <div className="uppercase font-bold text-shadow flex flex-col gap-2 text-xs sm:text-sm md:text-base lg:text-sm">
                 <span className="whitespace-nowrap">
-                  attack: {pokemon.stats.attack}{' '}
+                  attack: {pokemon.stats.attack}
                 </span>
                 <span className="whitespace-nowrap">
-                  {' '}
                   defense: {pokemon.stats.defense}
                 </span>
                 <span className="whitespace-nowrap">
-                  {' '}
                   special attack: {pokemon.stats['special-attack']}
                 </span>
                 <span className="whitespace-nowrap">
-                  {' '}
                   special defense: {pokemon.stats['special-attack']}
                 </span>
               </div>
