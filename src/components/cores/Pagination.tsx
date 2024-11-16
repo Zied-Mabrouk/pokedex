@@ -21,7 +21,7 @@ const Pagination = ({ currentPage, pages, onChangePage }: Props) => {
           </span>
         ) : (
           <span
-            className={`px-2 border bg-opacity-50 rounded-full cursor-pointer ${
+            className={`px-2 py-1 border bg-opacity-50 rounded-full cursor-pointer ${
               pagination === currentPage ? 'font-bold bg-poison' : 'bg-gray-500'
             }`}
             key={`${index}-${pagination}`}

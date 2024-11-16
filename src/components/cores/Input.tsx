@@ -21,7 +21,7 @@ const Input = ({ onChange, ...props }: Props) => {
   );
   return (
     <input
-      className="rounded-lg px-4 py-2 w-full text-black-500"
+      className="rounded-[4px] px-4 py-2 w-full text-black-500 h-[38px]"
       onChange={onHandleSearch}
       {...props}
     />

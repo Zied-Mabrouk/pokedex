@@ -12,6 +12,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  line-height: 1;
+  font-family: 'AeroFont';
 }
 
 :root {
@@ -38,14 +40,75 @@
   --default: #000000;
 }
 
-.pokemon-card {
-  background: linear-gradient(to right, #ffffff, #b8bab8);
-}
-
 .text-shadow {
-  text-shadow: 0 0 5px rgba(0, 0, 0, 1);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .remove-scrollbars {
   scrollbar-width: none;
+}
+
+.pattern {
+  background-image: url(/public/img/pattern.png);
+  background-blend-mode: overlay;
+}
+
+.border-inset {
+  border-style: inset;
+}
+.border-outset {
+  border-style: outset;
+}
+
+.box__line {
+  position: absolute;
+  background: white;
+}
+.box__line--top,
+.box__line--bottom {
+  height: 4px;
+  width: 100%;
+}
+.box__line--top::before,
+.box__line--bottom::before,
+.box__line--top::after,
+.box__line--bottom::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+}
+.box__line--top {
+  top: -4px;
+}
+.box__line--top::before {
+  left: 0;
+  bottom: -4px;
+}
+.box__line--top::after {
+  right: 0;
+  bottom: -4px;
+}
+.box__line--bottom {
+  bottom: -4px;
+}
+.box__line--bottom::before {
+  left: 0;
+  top: -4px;
+}
+.box__line--bottom::after {
+  right: 0;
+  top: -4px;
+}
+.box__line--left,
+.box__line--right {
+  width: 4px;
+  height: 100%;
+}
+.box__line--left {
+  left: -4px;
+}
+.box__line--right {
+  right: -4px;
 }

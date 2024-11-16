@@ -27,9 +27,9 @@ const Select = ({ label, options, selected, onChange }: Props) => {
         placeholder="-- Select an option --"
         onChange={handleChange}
         value={selected ? transformSelectValue(selected) : null}
-        options={options}
+        options={[{ value: '', label: '-- Select an option --' }, ...options]}
         maxMenuHeight={150}
-      ></SelectComponent>
+      />
     </div>
   );
 };

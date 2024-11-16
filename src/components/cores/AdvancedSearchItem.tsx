@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import Select from './Select';
 import {
   AdvancedSearchItemType,
@@ -40,7 +40,7 @@ const AdvancedSearchItem = ({
   return (
     <div className="py-4 w-full flex gap-8">
       <Select
-        label={'select'}
+        label={'select a stat attribute'}
         onChange={(value) => onAttributeChange(value.value)}
         options={options}
         selected={advancedSearch.attribute}

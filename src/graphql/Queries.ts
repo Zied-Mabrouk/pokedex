@@ -5,55 +5,51 @@ const GetPokemonsQuery = gql`
     $limit: Int
     $offset: Int
     $searchTerm: String!
-    $filters: pokemon_v2_pokemon_bool_exp!
+    $stats_filters: pokemon_v2_pokemonstat_bool_exp!
+    $type_filters: pokemon_v2_pokemontype_bool_exp!
+    $order_by: [pokemon_v2_pokemon_order_by!]
   ) {
-    pokemon_v2_pokemonspecies(
+    pokemon_v2_pokemon(
       limit: $limit
       offset: $offset
       where: {
-        _or: [
-          { _not: { pokemon_v2_pokemonspecy: {} } }
-          { pokemon_v2_pokemonspecy: { is_baby: { _eq: true } } }
-        ]
         name: { _like: $searchTerm }
-        pokemon_v2_pokemons: $filters
+        pokemon_v2_pokemontypes: $type_filters
+        pokemon_v2_pokemonstats: $stats_filters
       }
-      order_by: { id: asc }
+      order_by: $order_by
     ) {
-      id
-      evolution_chain_id
+      base_experience
       name
-      pokemon_v2_pokemons {
-        base_experience
-        height
-        weight
-        pokemon_v2_pokemonstats {
-          base_stat
-          pokemon_v2_stat {
-            name
-          }
-        }
-        pokemon_v2_pokemonsprites {
-          sprites
-        }
-        pokemon_v2_pokemontypes {
-          pokemon_v2_type {
-            name
-          }
+      height
+      weight
+      id
+      pokemon_v2_pokemonspecy {
+        pokemon_v2_pokemoncolor {
+          name
         }
       }
-      pokemon_v2_pokemoncolor {
-        name
+      pokemon_v2_pokemonstats {
+        base_stat
+        pokemon_v2_stat {
+          name
+        }
+      }
+      pokemon_v2_pokemonsprites {
+        sprites
+      }
+      pokemon_v2_pokemontypes {
+        pokemon_v2_type {
+          name
+        }
       }
     }
-    pokemon_v2_pokemonspecies_aggregate(
+
+    pokemon_v2_pokemon_aggregate(
       where: {
-        _or: [
-          { _not: { pokemon_v2_pokemonspecy: {} } }
-          { pokemon_v2_pokemonspecy: { is_baby: { _eq: true } } }
-        ]
         name: { _like: $searchTerm }
-        pokemon_v2_pokemons: $filters
+        pokemon_v2_pokemontypes: $type_filters
+        pokemon_v2_pokemonstats: $stats_filters
       }
     ) {
       aggregate {

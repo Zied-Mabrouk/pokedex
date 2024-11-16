@@ -13,6 +13,11 @@ export type AdvancedSearchItemType = {
   value?: string;
 };
 
+export type OrderType = {
+  field?: string;
+  order?: 'asc' | 'desc';
+};
+
 export type SearchType = {
   mainSearch: string;
   statsSearch: AdvancedSearchItemType;

@@ -8,7 +8,7 @@ import { useSearchParams } from 'react-router-dom';
 import Pagination from '../cores/Pagination';
 import Loader from '../cores/Loader';
 import Search from '../cores/Search';
-import { SearchType } from '../../types/misc';
+import { OrderType, SearchType } from '../../types/misc';
 
 const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,6 +17,7 @@ const Home = () => {
     parseInt(searchParams.get('page') ?? '1')
   );
   const [pagesNumber, setPageNumbers] = useState<number>(0);
+  const [orderBy, setOrderBy] = useState<OrderType>({});
   const [search, setSearch] = useState<SearchType>({
     mainSearch: '',
     statsSearch: {
@@ -33,7 +34,9 @@ const Home = () => {
       limit: 10,
       offset: (page - 1) * 10,
       searchTerm: '%',
-      filters: {},
+      stats_filters: {},
+      type_filters: {},
+      order_by: {},
     },
     onCompleted: (data) => {
       const parsedSpecies = parseData(data);
@@ -59,12 +62,10 @@ const Home = () => {
     const statsSearch =
       search.statsSearch.attribute && search.statsSearch.value
         ? {
-            pokemon_v2_pokemonstats: {
-              _and: {
-                base_stat: { _eq: parseInt(search.statsSearch.value) },
-                pokemon_v2_stat: {
-                  name: { _eq: search.statsSearch.attribute },
-                },
+            _and: {
+              base_stat: { _eq: parseInt(search.statsSearch.value) },
+              pokemon_v2_stat: {
+                name: { _eq: search.statsSearch.attribute },
               },
             },
           }
@@ -72,9 +73,7 @@ const Home = () => {
 
     const typeSearch = search.typeSearch
       ? {
-          pokemon_v2_pokemontypes: {
-            pokemon_v2_type: { name: { _eq: search.typeSearch } },
-          },
+          pokemon_v2_type: { name: { _eq: search.typeSearch } },
         }
       : {};
 
@@ -82,14 +81,17 @@ const Home = () => {
       limit: 10,
       offset: (page - 1) * 10,
       searchTerm: `${search.mainSearch.toLowerCase()}%`,
-      filters: { ...statsSearch, ...typeSearch },
+      stats_filters: statsSearch,
+      type_filters: typeSearch,
+      order_by: orderBy.field ? { [orderBy.field]: orderBy.order } : {},
     }).then((data) => {
       const parsedSpecies = parseData(data.data);
       const parsedCount = parseData(data.data, false, 1);
+
       setPageNumbers(Math.ceil(parsedCount.aggregate.count / 10));
       setPokemonsList(parsePokemonDataSet(parsedSpecies));
     });
-  }, [search, refetch, page]);
+  }, [search, refetch, page, orderBy]);
 
   const paginationElement = useMemo(
     () => (
@@ -116,14 +118,14 @@ const Home = () => {
   );
 
   return (
-    <div className="max-w-4xl mx-auto flex flex-col min-h-screen w-full px-8">
+    <div className="md:max-w-4xl xl:max-w-6xl mx-auto flex flex-col min-h-screen w-full px-8">
       <Search search={search} setSearch={handleSearchChange} />
       <div className="flex flex-col h-full justify-between py-4 flex-1">
         {paginationElement}
         {loading ? (
           <Loader />
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 justify-center gap-8 py-4">
+          <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 xl:grid-cols-3 justify-center gap-8 py-8">
             {pokemonsList.map((pokemon: PokemonType) => (
               <PokemonCard key={pokemon.id} pokemon={pokemon} />
             ))}
