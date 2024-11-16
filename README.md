@@ -95,6 +95,7 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 * [![Javascript][javascript.com]][javascript-url]
 * [![Typescript][typescript.com]][typescript-url]
 * [![Tailwind CSS][tailwindcss.com]][tailwindcss-url]
+* [![GraphQL][graphql.com]][graphql-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -153,11 +154,17 @@ Use this space to show useful examples of how a project can be used. Additional 
 ## Roadmap
 
 - [x] Pokemon Display
-- [x] Sort by name
-- [x] Search
+- [x] Pagination
+- [x] Responsivity
+- [x] Sort:
+    - [x] by name
+- [x] Search:
     - [x] Search by name
     - [x] Search by pokemon type
     - [x] Search by stats
+          
+- [x] Extra:
+    - [x] Play Pokemon Sound On Click
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -242,5 +249,6 @@ Project Link: [github/pokedex](https://github.com/Zied-Mabrouk/pokedex)
 [typescript-url]: https://tailwindcss.com/
 [JQuery-url]: https://jquery.com 
 [linkedin-url]: https://www.linkedin.com/in/mabrouk-zied
-
+[graphql.com]: https://img.shields.io/badge/graphql-grey?style=for-the-badge&logo=graphql
+[graphql-url]: https://graphql.org/
 
