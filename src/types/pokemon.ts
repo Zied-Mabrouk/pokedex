@@ -53,7 +53,7 @@ export type PokemonType = {
   base_experience: number;
   types: string[];
   color: string;
-  sprites: PokemonSpriteType;
+  sprites: PokemonSpriteType | null;
   stats: PokemonStatsType;
-  cries: PokemonCriesType;
+  cries: PokemonCriesType | null;
 };

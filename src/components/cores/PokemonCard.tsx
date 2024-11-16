@@ -15,9 +15,12 @@ const PokemonCard = ({ pokemon, pokemonRef }: Props) => {
     [pokemon.types]
   );
 
-  const [play] = useSound(pokemon.cries.lastest || pokemon.cries.legacy || '', {
-    volume: 0.1,
-  });
+  const [play] = useSound(
+    pokemon.cries?.lastest || pokemon.cries?.legacy || '',
+    {
+      volume: 0.1,
+    }
+  );
 
   const onClick = useCallback(() => {
     play();
