@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useMemo } from 'react';
+import React, { HTMLAttributes, ReactNode, useMemo } from 'react';
 import { PokemonTypeEnum } from '../../types/pokemon';
 import { twMerge } from 'tailwind-merge';
 
@@ -6,7 +6,7 @@ type Props = Pick<
   HTMLAttributes<HTMLButtonElement>,
   'onClick' | 'className' | 'title'
 > & {
-  label: string;
+  label: string | ReactNode;
   variant?: PokemonTypeEnum;
 };
 

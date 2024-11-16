@@ -24,6 +24,9 @@ const GetPokemonsQuery = gql`
       height
       weight
       id
+      pokemon_v2_pokemoncries {
+        cries
+      }
       pokemon_v2_pokemonspecy {
         pokemon_v2_pokemoncolor {
           name

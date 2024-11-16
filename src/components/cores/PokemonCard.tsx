@@ -1,7 +1,8 @@
-import React, { LegacyRef, useMemo } from 'react';
+import React, { LegacyRef, useCallback, useMemo } from 'react';
 import { PokemonType } from '../../types/pokemon';
 import { getPokemonTypeColors } from '../../utils/pokemon';
 import { Link } from 'react-router-dom';
+import useSound from 'use-sound';
 
 type Props = {
   pokemon: PokemonType;
@@ -13,22 +14,29 @@ const PokemonCard = ({ pokemon, pokemonRef }: Props) => {
     () => getPokemonTypeColors(pokemon.types),
     [pokemon.types]
   );
+
+  const [play] = useSound(pokemon.cries.lastest || pokemon.cries.legacy || '', {
+    volume: 0.1,
+  });
+
+  const onClick = useCallback(() => {
+    play();
+  }, [play]);
   return (
     <div
       ref={pokemonRef}
-      className="pokemon-card transition-all duration-500 scale-100 hover:scale-105 w-full aspect-[1/1.2] md:aspect-[1/2] max-h-[30rem] max-w-[24rem] rounded-lg shadow-md border-8 border-inset border-black overflow-hidden"
+      onClick={onClick}
+      title="Click on the card to hear the Pokémon sound"
+      className="cursor-pointer transition-all duration-500 scale-100 hover:scale-105 w-full aspect-[1/1.2] md:aspect-[1/2] max-h-[30rem] max-w-[24rem] rounded-lg shadow-md border-8 border-inset border-black overflow-hidden"
     >
       <div
         className={`bg-${pokemon.color}-500 bg-opacity-80 h-full w-full relative flex flex-col`}
       >
         <div className="absolute top-0 left-0 w-full h-full pattern z-0"></div>
         <div className="px-4 py-2 w-full justify-between flex items-center z-10 gap-4">
-          <Link
-            to={`/${pokemon.id}`}
-            className="uppercase text-xl whitespace-nowrap overflow-hidden text-ellipsis font-bold text-shadow h-fit leading-normal"
-          >
+          <span className="uppercase text-xl whitespace-nowrap overflow-hidden text-ellipsis font-bold text-shadow h-fit leading-normal">
             {pokemon.name}
-          </Link>
+          </span>
           <span className="font-bold uppercase text-shadow whitespace-nowrap">
             HP: {pokemon.stats.hp}
           </span>
@@ -53,7 +61,7 @@ const PokemonCard = ({ pokemon, pokemonRef }: Props) => {
           )}
           <div className="p-2 w-full flex z-10 h-fit">
             <div className="flex py-4 justify-between w-full items-end rounded-lg bg-opacity-20 bg-gray-200 px-2">
-              <div className="uppercase font-bold text-shadow flex flex-col gap-2 text-sm md:text-base">
+              <div className="uppercase font-bold text-shadow flex flex-col gap-2 text-sm md:text-base lg:text-sm">
                 <span className="whitespace-nowrap">
                   attack: {pokemon.stats.attack}{' '}
                 </span>

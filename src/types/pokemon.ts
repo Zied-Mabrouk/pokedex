@@ -41,6 +41,11 @@ export enum PokemonStatsEnum {
 
 type PokemonStatsType = Record<PokemonStatsEnum, number>;
 
+type PokemonCriesType = {
+  lastest: string;
+  legacy: string;
+};
+
 export type PokemonType = {
   id: number;
   name: string;
@@ -50,4 +55,5 @@ export type PokemonType = {
   color: string;
   sprites: PokemonSpriteType;
   stats: PokemonStatsType;
+  cries: PokemonCriesType;
 };

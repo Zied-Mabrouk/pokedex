@@ -11,10 +11,6 @@ function App() {
       path: '/',
       element: <Home />,
     },
-    {
-      path: '/:id',
-      element: <div />,
-    },
   ]);
   return (
     <ApolloProvider client={client}>

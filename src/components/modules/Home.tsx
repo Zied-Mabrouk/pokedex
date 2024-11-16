@@ -118,14 +118,18 @@ const Home = () => {
   );
 
   return (
-    <div className="md:max-w-4xl xl:max-w-6xl mx-auto flex flex-col min-h-screen w-full px-2 sm:px-8">
-      <Search search={search} setSearch={handleSearchChange} />
+    <div className="md:max-w-4xl lg:max-w-[95vw] mx-auto flex flex-col min-h-screen w-full px-2 sm:px-8">
+      <Search
+        search={search}
+        setSearch={handleSearchChange}
+        setOrderBy={setOrderBy}
+      />
       <div className="flex flex-col h-full justify-between py-4 flex-1">
         {paginationElement}
         {loading ? (
           <Loader />
         ) : (
-          <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 xl:grid-cols-3 justify-center gap-8 py-8">
+          <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-3 justify-center gap-6 md:gap-4 xl:gap-8 py-8">
             {pokemonsList.map((pokemon: PokemonType) => (
               <PokemonCard key={pokemon.id} pokemon={pokemon} />
             ))}

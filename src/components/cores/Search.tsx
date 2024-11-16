@@ -1,25 +1,41 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
 import Button from './Button';
 import Input from './Input';
 import { transformSelectValues } from '../../utils/data';
-import { SearchType, SelectValue } from '../../types/misc';
+import { OrderType, SearchType, SelectValue } from '../../types/misc';
 import AdvancedSearchItem from './AdvancedSearchItem';
 import { PokemonStatsEnum, PokemonTypeEnum } from '../../types/pokemon';
 import Select from './Select';
+import Dropdown from './Dropdown';
+import { FaSortAmountDown } from 'react-icons/fa';
 
 type Props = {
   search: SearchType;
   setSearch: (callback: (val: SearchType) => SearchType) => void;
+  setOrderBy: Dispatch<SetStateAction<OrderType>>;
 };
 
-const Search = ({ search, setSearch }: Props) => {
+const Search = ({ search, setSearch, setOrderBy }: Props) => {
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
 
   const handleShowAdvancedSearch = useCallback(() => {
     setShowAdvancedSearch((prev) => !prev);
   }, []);
 
-  const [statsOptions, typeOptions] = useMemo(
+  const handleSortChange = useCallback(
+    (selectValue: SelectValue) => {
+      setOrderBy(JSON.parse(selectValue.value) as OrderType);
+    },
+    [setOrderBy]
+  );
+
+  const [statsOptions, typeOptions, sortOptions] = useMemo(
     () => [
       transformSelectValues([
         PokemonStatsEnum.HP,
@@ -49,6 +65,16 @@ const Search = ({ search, setSearch }: Props) => {
         PokemonTypeEnum.STEEL,
         PokemonTypeEnum.WATER,
       ]),
+      [
+        {
+          label: 'Name A-Z',
+          value: '{"field":"name","order":"asc"}',
+        },
+        {
+          label: 'Name Z-A',
+          value: '{"field":"name","order":"desc"}',
+        },
+      ],
     ],
     []
   );
@@ -76,8 +102,16 @@ const Search = ({ search, setSearch }: Props) => {
           onChange={onHandleSearch}
           placeholder="Search for a pokemon..."
         />
-        <Button onClick={handleShowAdvancedSearch} label="Advanced Search" />
+        <div className="flex items-center gap-2">
+          <Button onClick={handleShowAdvancedSearch} label="Advanced Search" />
+          <Dropdown
+            onSelect={handleSortChange}
+            options={sortOptions}
+            buttonContent={<FaSortAmountDown />}
+          />
+        </div>
       </div>
+
       <div
         className={`mt-4 transition-all duration-[1s] bg-gray-600 bg-opacity-10 rounded-lg px-2 relative flex flex-col overflow-auto remove-scrollbars ${
           showAdvancedSearch ? 'h-64 max-h-80' : 'h-0'
