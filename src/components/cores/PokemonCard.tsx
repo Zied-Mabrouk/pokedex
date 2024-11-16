@@ -1,7 +1,6 @@
 import React, { LegacyRef, useCallback, useMemo } from 'react';
 import { PokemonType } from '../../types/pokemon';
 import { getPokemonTypeColors } from '../../utils/pokemon';
-import { Link } from 'react-router-dom';
 import useSound from 'use-sound';
 
 type Props = {

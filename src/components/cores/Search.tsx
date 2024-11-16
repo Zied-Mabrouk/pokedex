@@ -79,7 +79,7 @@ const Search = ({ search, setSearch, setOrderBy }: Props) => {
     []
   );
 
-  const [onHandleSearch, onHandleTypeSearch] = useMemo(
+  const [onHandleSearch, onHandleTypeSearch, onResetResearch] = useMemo(
     () => [
       (value: string) => {
         setSearch((prevSearch) => ({ ...prevSearch, mainSearch: value }));
@@ -88,6 +88,15 @@ const Search = ({ search, setSearch, setOrderBy }: Props) => {
         setSearch((prevSearch) => ({
           ...prevSearch,
           typeSearch: value.value as PokemonTypeEnum,
+        }));
+      },
+      () => {
+        setSearch(() => ({
+          mainSearch: '',
+          statsSearch: {
+            attribute: '',
+          },
+          typeSearch: '',
         }));
       },
     ],
@@ -104,6 +113,7 @@ const Search = ({ search, setSearch, setOrderBy }: Props) => {
         />
         <div className="flex items-center gap-2">
           <Button onClick={handleShowAdvancedSearch} label="Advanced Search" />
+          <Button onClick={onResetResearch} label="Reset" />
           <Dropdown
             onSelect={handleSortChange}
             options={sortOptions}
