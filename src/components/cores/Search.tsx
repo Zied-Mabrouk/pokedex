@@ -66,6 +66,7 @@ const Search = ({ search, setSearch, setOrderBy }: Props) => {
         PokemonTypeEnum.WATER,
       ]),
       [
+        { label: '-- Select an option --', value: '{}' },
         {
           label: 'Name A-Z',
           value: '{"field":"name","order":"asc"}',
@@ -105,19 +106,28 @@ const Search = ({ search, setSearch, setOrderBy }: Props) => {
 
   return (
     <div className="w-full py-4 flex flex-col">
-      <div className="items-center flex gap-4">
+      <div className="flex-col sm:flex-row sm:items-center flex gap-4">
         <Input
           value={search.mainSearch}
           onChange={onHandleSearch}
           placeholder="Search for a pokemon..."
         />
-        <div className="flex items-center gap-2">
-          <Button onClick={handleShowAdvancedSearch} label="Advanced Search" />
-          <Button onClick={onResetResearch} label="Reset" />
+        <div className="flex gap-2 items-center">
+          <Button
+            onClick={handleShowAdvancedSearch}
+            label="Advanced Search"
+            className="sm:h-[38px]"
+          />
+          <Button
+            onClick={onResetResearch}
+            label="Reset"
+            className="sm:h-[38px]"
+          />
           <Dropdown
             onSelect={handleSortChange}
             options={sortOptions}
             buttonContent={<FaSortAmountDown />}
+            buttonClassName="sm:h-[38px]"
           />
         </div>
       </div>
