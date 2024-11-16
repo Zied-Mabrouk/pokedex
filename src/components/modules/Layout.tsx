@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import Board from '../cores/Board';
 
 type Props = {
   children: ReactNode;

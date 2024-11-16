@@ -112,3 +112,7 @@
 .box__line--right {
   right: -4px;
 }
+
+body {
+  perspective: 1000px;
+}
