@@ -118,7 +118,7 @@ const Home = () => {
   );
 
   return (
-    <div className="md:max-w-4xl xl:max-w-6xl mx-auto flex flex-col min-h-screen w-full px-8">
+    <div className="md:max-w-4xl xl:max-w-6xl mx-auto flex flex-col min-h-screen w-full px-2 sm:px-8">
       <Search search={search} setSearch={handleSearchChange} />
       <div className="flex flex-col h-full justify-between py-4 flex-1">
         {paginationElement}
