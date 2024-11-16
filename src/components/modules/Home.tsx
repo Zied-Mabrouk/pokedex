@@ -130,7 +130,7 @@ const Home = () => {
         {loading ? (
           <Loader />
         ) : (
-          <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-3 justify-center gap-6 md:gap-4 xl:gap-8 py-8">
+          <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-3 justify-center gap-8 md:gap-4 xl:gap-8 py-8">
             {pokemonsList.map((pokemon: PokemonType) => (
               <PokemonCard key={pokemon.id} pokemon={pokemon} />
             ))}
