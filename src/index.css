@@ -49,8 +49,10 @@
 }
 
 .pattern {
-  background-image: url(/public/img/pattern.png);
   background-blend-mode: overlay;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 .border-inset {
