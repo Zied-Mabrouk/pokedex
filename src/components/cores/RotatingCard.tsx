@@ -28,26 +28,30 @@ const RotatingCard = ({ children }: Props) => {
   );
 
   return (
-    <Element
-      options={defaultOptions}
-      style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
-    >
-      <article
-        className={`board transition-all duration-1000 w-full max-w-[24rem] rounded-lg `}
+    <div className="h-full w-full">
+      <Element
+        options={defaultOptions}
+        style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
       >
-        <button
-          className={`card h-full w-full ${flipped ? 'flipped' : ''}`}
-          onClick={() => setFlipped((prev) => !prev)}
+        <article
+          className={`board transition-all duration-1000 w-full max-w-[24rem] rounded-lg `}
         >
-          <span className="wrapper h-full rounded-lg">
-            <span className="content h-full rounded-lg">
-              <span className="face back rounded-lg h-full"></span>
-              <span className="face front rounded-lg w-full ">{children}</span>
+          <button
+            className={`card h-full w-full ${flipped ? 'flipped' : ''}`}
+            onClick={() => setFlipped((prev) => !prev)}
+          >
+            <span className="wrapper h-full rounded-lg">
+              <span className="content h-full rounded-lg">
+                <span className="face back rounded-lg h-full"></span>
+                <span className="face front rounded-lg w-full ">
+                  {children}
+                </span>
+              </span>
             </span>
-          </span>
-        </button>
-      </article>
-    </Element>
+          </button>
+        </article>
+      </Element>
+    </div>
   );
 };
 
