@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { GetPokemonsQuery } from '../../graphql/Queries';
-import PokemonCard from '../cores/PokemonCard';
+import PokemonCard from '../cores/PokemonCard/PokemonCard';
 import { PokemonType } from '../../types/pokemon';
 import { parseData, parsePokemonDataSet } from '../../utils/data';
 import { useQuery } from '@apollo/client';
