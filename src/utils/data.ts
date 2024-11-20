@@ -1,4 +1,4 @@
-import { SelectValue, ValueOf } from '../types/misc';
+import { SelectValue } from '../types/misc';
 import {
   PokemonRawDataType,
   PokemonStatsEnum,

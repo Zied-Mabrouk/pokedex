@@ -1,4 +1,4 @@
-import React, { LegacyRef, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { PokemonType } from '../../../types/pokemon';
 import useSound from 'use-sound';
 import RotatingCard from '../RotatingCard';
