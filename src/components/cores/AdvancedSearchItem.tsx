@@ -11,7 +11,7 @@ type Props = {
   options: SelectValue[];
   advancedSearch: AdvancedSearchItemType;
   setSearch: (callback: (val: SearchType) => SearchType) => void;
-  indexKey: keyof SearchType;
+  indexKey: keyof Pick<SearchType, 'statsSearch'>;
 };
 
 const AdvancedSearchItem = ({
@@ -25,13 +25,16 @@ const AdvancedSearchItem = ({
       (attribute: string) => {
         setSearch((prevSearch) => ({
           ...prevSearch,
-          [indexKey]: { ...(prevSearch[indexKey] as any), attribute },
+          [indexKey]: {
+            ...prevSearch[indexKey],
+            attribute,
+          },
         }));
       },
       (value: string) => {
         setSearch((prevSearch) => ({
           ...prevSearch,
-          [indexKey]: { ...(prevSearch[indexKey] as any), value },
+          [indexKey]: { ...prevSearch[indexKey], value },
         }));
       },
     ],

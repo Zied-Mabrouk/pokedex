@@ -1,8 +1,5 @@
 import { PokemonTypeEnum } from './pokemon';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type AnyType = any;
-
 export type SelectValue = {
   value: string;
   label: string;
@@ -23,3 +20,4 @@ export type SearchType = {
   statsSearch: AdvancedSearchItemType;
   typeSearch: PokemonTypeEnum | '';
 };
+export type ValueOf<T> = T[keyof T];

@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { GetPokemonsQuery } from '../../graphql/Queries';
 import PokemonCard from '../cores/PokemonCard/PokemonCard';
-import { PokemonType } from '../../types/pokemon';
-import { parseData, parsePokemonDataSet } from '../../utils/data';
+import { PokemonApiResultType, PokemonType } from '../../types/pokemon';
+import { parsePokemonDataSet } from '../../utils/data';
 import { useQuery } from '@apollo/client';
 import { useSearchParams } from 'react-router-dom';
 import Pagination from '../cores/Pagination';
@@ -39,12 +39,11 @@ const Home = () => {
       type_filters: {},
       order_by: {},
     },
-    onCompleted: (data) => {
-      const parsedSpecies = parseData(data);
-      const parsedCount = parseData(data, false, 1);
-
-      setPageNumbers(Math.ceil(parsedCount.aggregate.count / 10));
-      setPokemonsList(parsePokemonDataSet(parsedSpecies));
+    onCompleted: (data: PokemonApiResultType) => {
+      setPageNumbers(
+        Math.ceil(data.pokemon_v2_pokemon_aggregate.aggregate.count / 10)
+      );
+      setPokemonsList(parsePokemonDataSet(data.pokemon_v2_pokemon));
     },
     onError: (error) => {
       console.error(error);
@@ -85,12 +84,12 @@ const Home = () => {
       stats_filters: statsSearch,
       type_filters: typeSearch,
       order_by: orderBy.field ? { [orderBy.field]: orderBy.order } : {},
-    }).then((data) => {
-      const parsedSpecies = parseData(data.data);
-      const parsedCount = parseData(data.data, false, 1);
-
-      setPageNumbers(Math.ceil(parsedCount.aggregate.count / 10));
-      setPokemonsList(parsePokemonDataSet(parsedSpecies));
+    }).then((d: { data: PokemonApiResultType }) => {
+      const data = d.data;
+      setPageNumbers(
+        Math.ceil(data.pokemon_v2_pokemon_aggregate.aggregate.count / 10)
+      );
+      setPokemonsList(parsePokemonDataSet(data.pokemon_v2_pokemon));
     });
   }, [search, refetch, page, orderBy]);
 
