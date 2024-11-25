@@ -1,5 +1,7 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+
 <a name="readme-top"></a>
+
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
 *** that would make this better, please fork the repo and create a pull request
@@ -7,8 +9,6 @@
 *** Don't forget to give the project a star!
 *** Thanks again! Now go create something AMAZING! :D
 -->
-
-
 
 <!-- PROJECT SHIELDS -->
 <!--
@@ -19,20 +19,15 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-
-
-
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-[<img src="https://github.com/Zied-Mabrouk/pokedex/blob/main/public/screenshot.png" width="100%">](https://github.com/Zied-Mabrouk/pokedex/blob/main/public/screenshot.png)
+[<img src="https://github.com/Zied-Mabrouk/pokedex/blob/main/public/screenshot.png" width="100%">](https://pokedex-xi-flame.vercel.app)
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
 
-
 <h3 align="center">Pokedex</h3>
-
 
   <p align="center">
     project_description
@@ -40,15 +35,13 @@
     <a href="https://github.com/Zied-Mabrouk/pokedex"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Zied-Mabrouk/pokedex">View Demo</a>
+    <a href="https://pokedex-xi-flame.vercel.app">View Demo</a>
     ·
     <a href="https://github.com/Zied-Mabrouk/pokedex/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
     <a href="https://github.com/Zied-Mabrouk/pokedex/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -76,32 +69,26 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
-## About The Project
 
+## About The Project
 
 Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 ### Built With
 
-
-* [![React][React.js]][React-url]
-* [![Javascript][javascript.com]][javascript-url]
-* [![Typescript][typescript.com]][typescript-url]
-* [![Tailwind CSS][tailwindcss.com]][tailwindcss-url]
-* [![GraphQL][graphql.com]][graphql-url]
+- [![React][React.js]][React-url]
+- [![Javascript][javascript.com]][javascript-url]
+- [![Typescript][typescript.com]][typescript-url]
+- [![Tailwind CSS][tailwindcss.com]][tailwindcss-url]
+- [![GraphQL][graphql.com]][graphql-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
@@ -110,7 +97,8 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* npm
+
+- npm
   ```sh
   npm install npm@latest -g
   ```
@@ -138,40 +126,34 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-
-
 <!-- USAGE EXAMPLES -->
+
 ## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- ROADMAP -->
+
 ## Roadmap
 
 - [x] Pokemon Display
 - [x] Pagination
 - [x] Responsivity
 - [x] Sort:
-    - [x] by name
+  - [x] by name
 - [x] Search:
-    - [x] Search by name
-    - [x] Search by pokemon type
-    - [x] Search by stats
-          
+  - [x] Search by name
+  - [x] Search by pokemon type
+  - [x] Search by stats
 - [x] Extra:
-    - [x] Play Pokemon Sound On Click
-
+  - [x] Play Pokemon Sound On Click
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -187,33 +169,27 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- CONTACT -->
+
 ## Contact
 
-Zied Mabrouk  - almabrouk.zied@gmail.com
+Zied Mabrouk - almabrouk.zied@gmail.com
 
 Project Link: [github/pokedex](https://github.com/Zied-Mabrouk/pokedex)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-
-
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
 [contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
@@ -242,13 +218,12 @@ Project Link: [github/pokedex](https://github.com/Zied-Mabrouk/pokedex)
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [javascript.com]: https://img.shields.io/badge/javascript-grey?style=for-the-badge&logo=javascript
-[javascript-url]: https://developer.mozilla.org/fr/docs/Web/JavaScript 
+[javascript-url]: https://developer.mozilla.org/fr/docs/Web/JavaScript
 [typescript.com]: https://img.shields.io/badge/typescript-grey?style=for-the-badge&logo=typescript
 [tailwindcss-url]: https://www.typescriptlang.org/
 [tailwindcss.com]: https://img.shields.io/badge/tailwindcss-grey?style=for-the-badge&logo=tailwindcss
 [typescript-url]: https://tailwindcss.com/
-[JQuery-url]: https://jquery.com 
+[JQuery-url]: https://jquery.com
 [linkedin-url]: https://www.linkedin.com/in/mabrouk-zied
 [graphql.com]: https://img.shields.io/badge/graphql-grey?style=for-the-badge&logo=graphql
 [graphql-url]: https://graphql.org/
-
