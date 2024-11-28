@@ -14,8 +14,12 @@ const PokemonSprite = ({ sprites }: Props) => {
         <div className="box__line box__line--bottom"></div>
         <div className="box__line box__line--left"></div>
         <img
-          src={sprites?.front_default ?? sprites?.front_shiny}
-          alt="pokemon.name"
+          src={
+            sprites?.front_default ??
+            sprites?.front_shiny ??
+            'https://icons.veryicon.com/png/o/miscellaneous/basic-icon-1/unknown-18.png'
+          }
+          alt={'unknown'}
           className="w-full object-contain relative h-full"
         />
       </div>
